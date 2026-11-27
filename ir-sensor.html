@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IR Sensor Module — Mazen Ahmed</title>
+<style>
+:root{--ink:#251f21;--mut:#585254;--line:#eae9ea;--teal:#3f7365;--bg:#fbfbfa;--card:#ffffff}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{max-width:880px;margin:0 auto;padding:48px 20px 8px}
+h1{font-size:30px;letter-spacing:-.02em}
+.tag{color:var(--teal);font-weight:600;margin:4px 0 12px}
+nav{max-width:880px;margin:18px auto 0;padding:0 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap}
+nav a{padding:8px 2px;color:var(--mut);text-decoration:none;font-weight:600;font-size:14px}
+nav a.on{color:var(--ink);border-bottom:2px solid var(--ink)}
+main{max-width:880px;margin:0 auto;padding:24px 20px 64px}
+section{margin:30px 0}
+h2{font-size:20px;margin-bottom:10px}
+p{color:var(--mut)}
+p b{color:var(--ink)}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gal figure{margin:0}
+.gal img{width:100%;border-radius:10px;display:block}
+.gal figcaption{color:var(--mut);font-size:13px;margin-top:4px}
+ul{margin:6px 0 0 20px;color:var(--mut)}
+li{margin:5px 0}
+a{color:var(--teal)}
+@media(max-width:640px){.gal{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Custom IR sensor module with 3D-printed enclosure</h1>
+  <p class="tag">Analog circuit design, PCB fabrication, mechanical design</p>
+</header>
+<nav>
+  <a href="index.html">Portfolio</a>
+  <a href="cv.html">CV (English)</a>
+  <a href="lebenslauf.html">Lebenslauf (DE)</a>
+</nav>
+<main>
+
+<section>
+  <h2>Overview</h2>
+  <p>A custom infrared sensor module built end to end: schematic and single-layer PCB layout designed in Autodesk EAGLE around an LM358 op-amp, the board etched and hand-soldered, and a snap-fit enclosure modeled to the exact board dimensions and FDM 3D-printed.</p>
+</section>
+
+<section>
+  <h2>What I did</h2>
+  <ul>
+    <li>Designed the custom schematic and single-layer PCB layout in EAGLE around the LM358 op-amp.</li>
+    <li>Fabricated the board: toner transfer, chemical etching, drilling.</li>
+    <li>Assembled and hand-soldered all through-hole components.</li>
+    <li>Modeled the snap-fit enclosure to the PCB dimensions and 3D-printed it (FDM).</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Design and build</h2>
+  <div class="gal">
+    <figure><img src="photos/ir-schematic.jpg" alt="EAGLE schematic and board layout of the IR sensor circuit"><figcaption>Schematic and board layout in EAGLE 9.6.</figcaption></figure>
+    <figure><img src="photos/ir-cad.jpg" alt="Freshly 3D-printed enclosure parts on the printer"><figcaption>Enclosure and lid, fresh off the 3D printer.</figcaption></figure>
+    <figure><img src="photos/ir-board.jpg" alt="The etched and hand-soldered LM358 board"><figcaption>The etched, drilled and hand-soldered board.</figcaption></figure>
+    <figure><img src="photos/ir-enclosure.jpg" alt="Board fitted inside the printed enclosure"><figcaption>Board seated in the snap-fit enclosure.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Tools and skills shown</h2>
+  <p>Autodesk EAGLE (schematic and layout), PCB etching and through-hole soldering, 3D CAD modeling, FDM 3D printing.</p>
+</section>
+
+</main>
+</body>
+</html>
