@@ -87,9 +87,9 @@ td:first-child{color:var(--ink);font-weight:600}
         <text x="515" y="120" text-anchor="middle" fill="#585254">notice</text>
 
         <rect x="604" y="60" width="184" height="70" rx="10" fill="#ffffff" stroke="#251f21" stroke-width="1.5"/>
-        <text x="696" y="88" text-anchor="middle" fill="#251f21" font-weight="600">Email + WhatsApp link</text>
-        <text x="696" y="106" text-anchor="middle" fill="#585254">both people, same</text>
-        <text x="696" y="120" text-anchor="middle" fill="#585254">minute, nothing public</text>
+        <text x="696" y="86" text-anchor="middle" fill="#251f21" font-weight="600">Email + WhatsApp</text>
+        <text x="696" y="104" text-anchor="middle" fill="#585254">both people, same minute,</text>
+        <text x="696" y="120" text-anchor="middle" fill="#585254">nothing public</text>
 
         <g stroke="#3f7365" stroke-width="2" fill="none">
           <line x1="130" y1="95" x2="158" y2="95"/><line x1="278" y1="95" x2="306" y2="95"/>
@@ -120,29 +120,29 @@ td:first-child{color:var(--ink);font-weight:600}
 <section>
   <h2>The three-way loop</h2>
   <figure class="fig">
-    <svg viewBox="0 0 800 260" role="img" aria-label="Three people in a loop, each taking the next person's shift">
+    <svg viewBox="0 0 800 330" role="img" aria-label="Three people in a loop, each taking the next person's shift">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#3f7365"/>
+        </marker>
+      </defs>
       <g font-family="Inter,system-ui,sans-serif" font-size="13">
-        <circle cx="400" cy="60" r="34" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
-        <text x="400" y="65" text-anchor="middle" fill="#251f21" font-weight="600">A</text>
-        <circle cx="270" cy="210" r="34" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
-        <text x="270" y="215" text-anchor="middle" fill="#251f21" font-weight="600">B</text>
-        <circle cx="530" cy="210" r="34" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
-        <text x="530" y="215" text-anchor="middle" fill="#251f21" font-weight="600">C</text>
+        <circle cx="400" cy="70" r="36" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
+        <text x="400" y="76" text-anchor="middle" fill="#251f21" font-weight="600">A</text>
+        <circle cx="240" cy="250" r="36" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
+        <text x="240" y="256" text-anchor="middle" fill="#251f21" font-weight="600">B</text>
+        <circle cx="560" cy="250" r="36" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
+        <text x="560" y="256" text-anchor="middle" fill="#251f21" font-weight="600">C</text>
 
         <g stroke="#3f7365" stroke-width="2" fill="none" marker-end="url(#ar)">
-          <path d="M376 88 C 330 130, 300 150, 288 176"/>
-          <path d="M300 232 C 380 258, 460 250, 512 230"/>
-          <path d="M508 178 C 480 140, 450 110, 424 88"/>
+          <path d="M372 96 C 330 140, 296 170, 272 214"/>
+          <path d="M276 268 C 360 300, 440 300, 524 268"/>
+          <path d="M528 214 C 504 170, 470 140, 428 96"/>
         </g>
-        <defs>
-          <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 z" fill="#3f7365"/>
-          </marker>
-        </defs>
 
-        <text x="300" y="128" fill="#585254">A works B's shift</text>
-        <text x="360" y="258" fill="#585254">B works C's shift</text>
-        <text x="560" y="128" fill="#585254">C works A's shift</text>
+        <text x="146" y="152" fill="#585254">A takes B's shift</text>
+        <text x="400" y="322" text-anchor="middle" fill="#585254">B takes C's shift</text>
+        <text x="628" y="152" fill="#585254">C takes A's shift</text>
       </g>
     </svg>
     <figcaption>A three-way loop: nobody can swap with a single partner, but the three of them together get every request satisfied.</figcaption>
