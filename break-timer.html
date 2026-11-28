@@ -31,6 +31,7 @@ th{color:var(--ink);font-size:13px;letter-spacing:.04em;text-transform:uppercase
 td:first-child{color:var(--ink);white-space:nowrap;font-weight:600}
 .fig{margin:16px 0}
 .fig svg{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.fig img{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:10px}
 .fig figcaption{color:var(--mut);font-size:13px;margin-top:6px}
 .steps{counter-reset:s}
 .step{border-top:1px solid var(--line);padding:12px 0;color:var(--mut)}
@@ -105,17 +106,17 @@ td:first-child{color:var(--ink);white-space:nowrap;font-weight:600}
   <h2>Electronics</h2>
   <ul>
     <li><b>Controller:</b> ATtiny13A-PU, plain C with avr-gcc, no Arduino core. The firmware fits in 994 of the 1024 bytes of flash. The chosen early-warning setting is written to EEPROM, so it survives a battery change.</li>
-    <li><b>Input:</b> one 12 x 12 x 4.3 mm tactile switch on PB3, read with the internal pull-up.</li>
+    <li><b>Input:</b> one 12 x 12 x 7.5 mm round-plunger tactile switch on PB3, read with the internal pull-up. No separate cap: the plunger sits 1.2 mm proud through a plain hole in the thumb dish, so the thumb presses the switch itself.</li>
     <li><b>Output:</b> an 8 mm coin vibration motor on PB0, driven through a BC337 transistor with a 1 kΩ base resistor and a 1N4148 flyback diode across the motor.</li>
     <li><b>Power:</b> two AAA cells. The case is the battery holder: spring contact plates at each end, with about 30 mm of slack in the series wire so the cells can be lifted out.</li>
-    <li><b>Build:</b> through-hole on 7 x 9 cm vero board, chip in an 8-pin socket, flashed with a USBasp.</li>
+    <li><b>Build:</b> through-hole on a 20 x 28 mm perf board that has its own mount inside the case, chip in an 8-pin socket, flashed with a USBasp.</li>
   </ul>
   <p>No LED and no display, on purpose. The only thing a person needs to know is whether the break is over, and a buzz says that in the pocket without a light that gives the device away in a dim room.</p>
 </section>
 
 <section>
   <h2>The case</h2>
-  <p>Two shells, 50 x 64 x 17 mm, press fit, with the button at one end and the motor at the other so the buzz lands away from the thumb.</p>
+  <p>Two shells, 64 x 50 x 17 mm, closed with four M3 x 10 screws into nut traps and opened with a pry notch at the back. The button is at one end and the motor at the other, so the buzz lands away from the thumb.</p>
   <figure class="fig">
     <svg viewBox="0 0 800 330" role="img" aria-label="Dimensioned drawing of the two-shell case: 64 by 50 by 17 mm, with the button and thumb dish at one end and the motor at the other">
       <g font-family="Inter,system-ui,sans-serif" font-size="12" fill="#585254">
@@ -148,9 +149,9 @@ td:first-child{color:var(--ink);white-space:nowrap;font-weight:600}
 
         <circle cx="436" cy="70" r="10" fill="#3f7365"/>
         <text x="436" y="74" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="600">1</text>
-        <text x="458" y="68">Button: 12 x 12 mm tactile switch,</text>
-        <text x="458" y="84">4.3 mm actuator, under a Ø22 mm</text>
-        <text x="458" y="100">thumb dish 0.69 mm deep</text>
+        <text x="458" y="68">12 x 12 x 7.5 mm round-plunger</text>
+        <text x="458" y="84">switch, no cap, plunger 1.2 mm</text>
+        <text x="458" y="100">proud through a Ø22 mm dish</text>
 
         <circle cx="436" cy="128" r="10" fill="#3f7365"/>
         <text x="436" y="132" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="600">2</text>
@@ -159,20 +160,32 @@ td:first-child{color:var(--ink);white-space:nowrap;font-weight:600}
 
         <circle cx="436" cy="170" r="10" fill="#3f7365"/>
         <text x="436" y="174" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="600">3</text>
-        <text x="458" y="168">Seam: 0.25 mm clearance, 0.7 mm</text>
-        <text x="458" y="184">detent bumps, 8 mm thumbnail notch</text>
+        <text x="458" y="168">Seam: 4 x M3 x 10 screws into</text>
+        <text x="458" y="184">nut traps, plus a pry notch</text>
 
         <text x="430" y="222" fill="#251f21" font-weight="600">Envelope and print</text>
         <text x="430" y="244">64 x 50 x 17 mm overall, two shells,</text>
-        <text x="430" y="260">friction press fit</text>
+        <text x="430" y="260">screwed closure</text>
         <text x="430" y="282">Printed outer face down, no supports,</text>
         <text x="430" y="298">0.2 mm layers</text>
       </g>
     </svg>
     <figcaption>Top shell, from above. The thumb dish is a shallow depression that finds the button without looking; the motor sits at the opposite end.</figcaption>
   </figure>
-  <p>The seam is designed for a printer, not for a machinist: a quarter millimetre of clearance so the two shells still fit after the printer's own tolerance, 0.7 mm bumps that hold the press fit, and a thumbnail notch at the back to open it.</p>
+  <p>Inside, every part has a home rather than being packed in foam: a mount for the 20 x 28 mm perf board, pockets cut for standard AAA contact plates (10 x 9 x 0.3 mm), and a 9.6 mm motor cradle with snap fingers that holds the coin motor without glue.</p>
   <p>The model is parametric. Every dimension is a variable in a Python script that builds the two shells with mesh booleans, so changing the switch height or the motor size is one number and a rebuild, not a re-draw. Each iteration is then checked by measurement rather than by eye: interference between the shells and the real switch, cell, contact plate and compressed spring; shell-to-shell overlap; and the down-facing area that decides whether the print needs supports.</p>
+</section>
+
+<section>
+  <h2>Renders</h2>
+  <figure class="fig">
+    <img src="bt-shells.jpg" alt="Both shells rendered: cavity side of the top and bottom shell, and their outer faces">
+    <figcaption>Both shells: cavity side on top, outer faces below. This overview is from the v2/v3 shell family; v3 changed only the battery plate pockets and the hardware inside.</figcaption>
+  </figure>
+  <figure class="fig">
+    <img src="bt-v3-section.jpg" alt="Section through one AAA cell showing contact plate, cell, spring and second plate, with a close-up of the plate pocket">
+    <figcaption>v3, section through one cell: contact plate, AAA cell, compressed spring, plate. The close-up shows the 0.30 mm pocket with the relief slot behind the plate.</figcaption>
+  </figure>
 </section>
 
 <section>
@@ -180,7 +193,7 @@ td:first-child{color:var(--ink);white-space:nowrap;font-weight:600}
   <div class="steps">
     <div class="step"><b>v1 — first layout</b>Two shells with the button on the long edge. Printed as a preview render only; the layout put the thumb across the seam and left no room for the cell contacts.</div>
     <div class="step"><b>v2 — opposite ends</b>Button and motor moved to opposite ends, dish centred on the button. A cross-section check found a real fault: the battery contact plate pockets were cut 1.8 mm deep for plates that are 0.3 mm thick, so the plates would have sat in a trench and the cells would have rattled instead of being held.</div>
-    <div class="step"><b>v3 — the version being printed</b>Pockets cut to 0.30 mm with a shallow relief slot behind each plate, because the plate pin spacing is not published. The pedestals the print shop flagged as loose were filled into the arch. The thumb dish was deepened to a 0.69 mm concentric depression. Verified by interference checks on the plate, cell, spring and shell overlap, and by a down-facing area check on the print orientation.</div>
+    <div class="step"><b>v3 — the version being printed</b>Plate pockets cut to 0.30 mm with a shallow relief slot behind each plate, because the plate pin spacing is not published. The pedestals the print shop flagged as loose were filled into the arch. Added the perf board mount, the 9.6 mm motor cradle with snap fingers, and screw bosses with nut traps for four M3 x 10 screws. The switch changed to the 12 x 12 x 7.5 mm round-plunger type, pressed through a plain hole in the thumb dish. Verified by interference checks on the plate, cell, spring and shell overlap, and by a down-facing area check on the print orientation.</div>
   </div>
   <div class="note">
     <b>Why no supports in the dish.</b> Printed face down, the dish is not a bridge: it is a 0.69 mm void between the part and the build plate, three or four layers at 0.2 mm. The first layers simply land on the bed, and the opening closes from 19 mm down to the 7.8 mm button hole over four layers. The dish will come out slightly shallower than modelled and a little rough inside, which does not matter for a thumb guide. The print instruction is supports off, 0.2 mm layers.
@@ -190,7 +203,7 @@ td:first-child{color:var(--ink);white-space:nowrap;font-weight:600}
 <section>
   <h2>Parts and printing</h2>
   <p>The electronics come from a component shop in Cairo, ordered as a single-unit bill of materials: ATtiny13A-PU, 8-pin socket, BC337, 1N4148, 1 kΩ resistor, RCD0820 8 mm coin motor, AAA contact plate set, two AAA cells and a piece of vero board. Nine lines, about 180 EGP at single-unit prices; the switch and the programmer were already in my kit.</p>
-  <p>The shells are printed in PLA by a local print shop in Cairo, CreatoTech, at 0.2 mm layers with no supports. The first pair is on order from the v3 files; before that, the same shop flagged the loose pedestals in the earlier pair, which v3 fixed.</p>
+  <p>The shells are printed in PLA by CreatoTech, a print shop in Alexandria, at 0.2 mm layers with no supports. The first pair is on order from the v3 files; before that, the same shop flagged the loose pedestals in the earlier pair, which v3 fixed.</p>
 </section>
 
 <section>
