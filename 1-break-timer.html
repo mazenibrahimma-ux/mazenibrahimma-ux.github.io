@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pocket break buzzer — one-button break timer — Mazen Ahmed</title>
+<style>
+:root{--ink:#251f21;--mut:#585254;--line:#eae9ea;--teal:#3f7365;--bg:#fbfbfa;--card:#ffffff}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{max-width:880px;margin:0 auto;padding:48px 20px 8px}
+h1{font-size:30px;letter-spacing:-.02em}
+.tag{color:var(--teal);font-weight:600;margin:4px 0 12px}
+nav{max-width:880px;margin:18px auto 0;padding:0 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap}
+nav a{padding:8px 2px;color:var(--mut);text-decoration:none;font-weight:600;font-size:14px}
+nav a.on{color:var(--ink);border-bottom:2px solid var(--ink)}
+main{max-width:880px;margin:0 auto;padding:24px 20px 64px}
+section{margin:32px 0}
+h2{font-size:20px;margin-bottom:10px}
+h3{font-size:16px;margin:18px 0 6px}
+p{color:var(--mut)}
+ul{margin:6px 0 0 20px;color:var(--mut)}
+li{margin:5px 0}
+a{color:var(--teal)}
+.lede{color:var(--ink);font-size:17px}
+.status{border-left:3px solid var(--teal);padding:10px 0 10px 14px;margin:18px 0;color:var(--ink)}
+.status b{display:block}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--mut)}
+th{color:var(--ink);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+td:first-child{color:var(--ink);white-space:nowrap;font-weight:600}
+.fig{margin:16px 0}
+.fig svg{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.fig figcaption{color:var(--mut);font-size:13px;margin-top:6px}
+.steps{counter-reset:s}
+.step{border-top:1px solid var(--line);padding:12px 0;color:var(--mut)}
+.step b{display:block;color:var(--ink)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--mut);font-size:15px;margin:16px 0}
+.note b{color:var(--ink)}
+@media(max-width:640px){td:first-child{white-space:normal}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Pocket break buzzer</h1>
+  <p class="tag">Product design, AVR firmware, 3D-printed enclosure — prototype</p>
+</header>
+<nav>
+  <a href="index.html">Portfolio</a>
+  <a href="cv.html">CV (English)</a>
+  <a href="lebenslauf.html">Lebenslauf (DE)</a>
+</nav>
+<main>
+
+<section>
+  <h2>Overview</h2>
+  <p class="lede">Call-center and customer-service agents break at the same fixed times. A phone is the obvious timer, and the obvious distraction. This is a small battery-powered device with one button: press it, and it buzzes when the break is over. No screen, no app, no phone.</p>
+  <div class="status">
+    <b>Where it stands: prototype, in progress.</b>
+    The design is finished (v3 shells), the STL files are with the print shop for the first print, and the electronics are being assembled next. Nothing is tested in daily use yet and nothing is for sale. Everything below is the design as built, not a shipped product.
+  </div>
+</section>
+
+<section>
+  <h2>The problem it solves</h2>
+  <p>Breaks run on a fixed clock and everyone's break starts at the same minute. The two things people actually need to know are when the break ends and when to head back. A phone answers both, at the cost of picking up the phone during the one part of the shift that is supposed to be a rest. A watch works, but nobody wants to reset a countdown four times a shift.</p>
+  <p>The device is deliberately dumb: one button, one vibration motor, four gestures. It has no radio, no screen and no way to distract anyone.</p>
+</section>
+
+<section>
+  <h2>How it is used</h2>
+  <table>
+    <tr><th>Gesture</th><th>What it does</th></tr>
+    <tr><td>Double press</td><td>Start a 15-minute break.</td></tr>
+    <tr><td>Hold 1 second</td><td>Start a 45-minute lunch.</td></tr>
+    <tr><td>Single press</td><td>Stop and cancel the running timer.</td></tr>
+    <tr><td>Hold 4 seconds</td><td>Cycle the early warning: off, 3 minutes before the end (one buzz), 8 minutes before the end (two buzzes).</td></tr>
+  </table>
+  <figure class="fig">
+    <svg viewBox="0 0 800 200" role="img" aria-label="Gesture timing diagram: short press, double press, one second hold, four second hold">
+      <g fill="#585254" font-family="Inter,system-ui,sans-serif" font-size="13">
+        <text x="20" y="26" fill="#251f21" font-weight="600">Single press</text>
+        <rect x="20" y="38" width="18" height="26" rx="3" fill="#3f7365"/>
+        <text x="48" y="56">under 1 s: stop / cancel</text>
+
+        <text x="20" y="96" fill="#251f21" font-weight="600">Double press</text>
+        <rect x="20" y="108" width="18" height="26" rx="3" fill="#3f7365"/>
+        <rect x="46" y="108" width="18" height="26" rx="3" fill="#3f7365"/>
+        <text x="76" y="126">two presses: start 15 min break</text>
+
+        <text x="380" y="26" fill="#251f21" font-weight="600">Hold 1 s</text>
+        <rect x="380" y="38" width="90" height="26" rx="3" fill="#3f7365"/>
+        <text x="480" y="56">start 45 min lunch</text>
+
+        <text x="380" y="96" fill="#251f21" font-weight="600">Hold 4 s</text>
+        <rect x="380" y="108" width="300" height="26" rx="3" fill="#3f7365"/>
+        <text x="380" y="156">early warning cycles off → 3 min → 8 min</text>
+      </g>
+    </svg>
+    <figcaption>Four gestures on one button, told apart by press count and hold length. The firmware polls the switch directly instead of using the watchdog, because a 1-second wake is too coarse to time a hold.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Electronics</h2>
+  <ul>
+    <li><b>Controller:</b> ATtiny13A-PU, plain C with avr-gcc, no Arduino core. The firmware fits in 994 of the 1024 bytes of flash. The chosen early-warning setting is written to EEPROM, so it survives a battery change.</li>
+    <li><b>Input:</b> one 12 x 12 x 4.3 mm tactile switch on PB3, read with the internal pull-up.</li>
+    <li><b>Output:</b> an 8 mm coin vibration motor on PB0, driven through a BC337 transistor with a 1 kΩ base resistor and a 1N4148 flyback diode across the motor.</li>
+    <li><b>Power:</b> two AAA cells. The case is the battery holder: spring contact plates at each end, with about 30 mm of slack in the series wire so the cells can be lifted out.</li>
+    <li><b>Build:</b> through-hole on 7 x 9 cm vero board, chip in an 8-pin socket, flashed with a USBasp.</li>
+  </ul>
+  <p>No LED and no display, on purpose. The only thing a person needs to know is whether the break is over, and a buzz says that in the pocket without a light that gives the device away in a dim room.</p>
+</section>
+
+<section>
+  <h2>The case</h2>
+  <p>Two shells, 50 x 64 x 17 mm, press fit, with the button at one end and the motor at the other so the buzz lands away from the thumb.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 800 320" role="img" aria-label="Dimensioned drawing of the two-shell case: 50 by 64 by 17 mm, button and thumb dish at one end, motor at the other">
+      <g font-family="Inter,system-ui,sans-serif" font-size="12" fill="#585254">
+        <rect x="120" y="60" width="280" height="180" rx="16" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
+        <circle cx="180" cy="150" r="52" fill="#f2f4f3" stroke="#9aa5a1" stroke-width="1.5"/>
+        <circle cx="180" cy="150" r="22" fill="#e3e8e6" stroke="#251f21" stroke-width="2"/>
+        <circle cx="180" cy="150" r="8" fill="#3f7365"/>
+        <circle cx="350" cy="150" r="20" fill="#ffffff" stroke="#251f21" stroke-width="2" stroke-dasharray="4 4"/>
+        <text x="350" y="155" text-anchor="middle" fill="#251f21" font-weight="600">M</text>
+
+        <line x1="120" y1="270" x2="400" y2="270" stroke="#585254"/>
+        <line x1="120" y1="264" x2="120" y2="276" stroke="#585254"/>
+        <line x1="400" y1="264" x2="400" y2="276" stroke="#585254"/>
+        <text x="260" y="290" text-anchor="middle">64 mm</text>
+
+        <line x1="90" y1="60" x2="90" y2="240" stroke="#585254"/>
+        <line x1="84" y1="60" x2="96" y2="60" stroke="#585254"/>
+        <line x1="84" y1="240" x2="96" y2="240" stroke="#585254"/>
+        <text x="80" y="155" text-anchor="end">50 mm</text>
+
+        <line x1="180" y1="150" x2="268" y2="104" stroke="#9aa5a1"/>
+        <text x="274" y="100">Ø22 mm thumb dish, 0.69 mm deep, concentric with the button</text>
+        <line x1="350" y1="150" x2="470" y2="196" stroke="#9aa5a1"/>
+        <text x="476" y="200">8 mm coin motor, in its own ring at the far end</text>
+        <line x1="180" y1="150" x2="120" y2="86" stroke="#9aa5a1"/>
+        <text x="128" y="80">12 x 12 mm tactile switch, 4.3 mm actuator</text>
+      </g>
+      <g font-family="Inter,system-ui,sans-serif" font-size="12" fill="#585254">
+        <text x="560" y="60" fill="#251f21" font-weight="600">Shell details</text>
+        <text x="560" y="86">17 mm overall height</text>
+        <text x="560" y="110">Seam: 0.25 mm clearance,</text>
+        <text x="560" y="128">0.7 mm detent bumps</text>
+        <text x="560" y="152">8 mm thumbnail notch</text>
+        <text x="560" y="176">Print: outer face down,</text>
+        <text x="560" y="194">no supports, 0.2 mm layers</text>
+      </g>
+    </svg>
+    <figcaption>Top shell, from above. The thumb dish is a shallow depression that finds the button without looking; the motor sits at the opposite end.</figcaption>
+  </figure>
+  <p>The seam is designed for a printer, not for a machinist: a quarter millimetre of clearance so the two shells still fit after the printer's own tolerance, 0.7 mm bumps that hold the press fit, and a thumbnail notch at the back to open it.</p>
+  <p>The model is parametric. Every dimension is a variable in a Python script that builds the two shells with mesh booleans, so changing the switch height or the motor size is one number and a rebuild, not a re-draw. Each iteration is then checked by measurement rather than by eye: interference between the shells and the real switch, cell, contact plate and compressed spring; shell-to-shell overlap; and the down-facing area that decides whether the print needs supports.</p>
+</section>
+
+<section>
+  <h2>Iterations: what the checks caught</h2>
+  <div class="steps">
+    <div class="step"><b>v1 — first layout</b>Two shells with the button on the long edge. Printed as a preview render only; the layout put the thumb across the seam and left no room for the cell contacts.</div>
+    <div class="step"><b>v2 — opposite ends</b>Button and motor moved to opposite ends, dish centred on the button. A cross-section check found a real fault: the battery contact plate pockets were cut 1.8 mm deep for plates that are 0.3 mm thick, so the plates would have sat in a trench and the cells would have rattled instead of being held.</div>
+    <div class="step"><b>v3 — the version being printed</b>Pockets cut to 0.30 mm with a shallow relief slot behind each plate, because the plate pin spacing is not published. The pedestals the print shop flagged as loose were filled into the arch. The thumb dish was deepened to a 0.69 mm concentric depression. Verified by interference checks on the plate, cell, spring and shell overlap, and by a down-facing area check on the print orientation.</div>
+  </div>
+  <div class="note">
+    <b>Why no supports in the dish.</b> Printed face down, the dish is not a bridge: it is a 0.69 mm void between the part and the build plate, three or four layers at 0.2 mm. The first layers simply land on the bed, and the opening closes from 19 mm down to the 7.8 mm button hole over four layers. The dish will come out slightly shallower than modelled and a little rough inside, which does not matter for a thumb guide. The print instruction is supports off, 0.2 mm layers.
+  </div>
+</section>
+
+<section>
+  <h2>Parts and printing</h2>
+  <p>The electronics come from a component shop in Cairo, ordered as a single-unit bill of materials: ATtiny13A-PU, 8-pin socket, BC337, 1N4148, 1 kΩ resistor, RCD0820 8 mm coin motor, AAA contact plate set, two AAA cells and a piece of vero board. Nine lines, about 180 EGP at single-unit prices; the switch and the programmer were already in my kit.</p>
+  <p>The shells are printed in PLA by a local print shop in Cairo, CreatoTech, at 0.2 mm layers with no supports. The first pair is on order from the v3 files; before that, the same shop printed the earlier pair and flagged the loose pedestals that v3 fixed.</p>
+</section>
+
+<section>
+  <h2>What is next</h2>
+  <ul>
+    <li>Assemble the first unit and flash the firmware.</li>
+    <li>Calibrate the 15 and 45 minute timers against a stopwatch: the ATtiny13A runs on its internal RC oscillator, which is only good to about ±10%, so the firmware constants may need trimming.</li>
+    <li>Carry it for a week of real shifts before deciding whether it is worth building more than one.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Tools and skills shown</h2>
+  <p>AVR C firmware (avr-gcc, EEPROM storage, debounce and gesture timing), low-side transistor drive with flyback protection, parametric CAD in Python (trimesh booleans), FDM print orientation and support decisions, tolerance and interference checking, single-unit BOM and sourcing.</p>
+</section>
+
+</main>
+</body>
+</html>

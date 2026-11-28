@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shift-swap matcher — Mazen Ahmed</title>
+<style>
+:root{--ink:#251f21;--mut:#585254;--line:#eae9ea;--teal:#3f7365;--bg:#fbfbfa;--card:#ffffff}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{max-width:880px;margin:0 auto;padding:48px 20px 8px}
+h1{font-size:30px;letter-spacing:-.02em}
+.tag{color:var(--teal);font-weight:600;margin:4px 0 12px}
+nav{max-width:880px;margin:18px auto 0;padding:0 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap}
+nav a{padding:8px 2px;color:var(--mut);text-decoration:none;font-weight:600;font-size:14px}
+nav a.on{color:var(--ink);border-bottom:2px solid var(--ink)}
+main{max-width:880px;margin:0 auto;padding:24px 20px 64px}
+section{margin:32px 0}
+h2{font-size:20px;margin-bottom:10px}
+h3{font-size:16px;margin:18px 0 6px}
+p{color:var(--mut)}
+ul{margin:6px 0 0 20px;color:var(--mut)}
+li{margin:5px 0}
+a{color:var(--teal)}
+.lede{color:var(--ink);font-size:17px}
+.status{border-left:3px solid var(--teal);padding:10px 0 10px 14px;margin:18px 0;color:var(--ink)}
+.status b{display:block}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--mut)}
+th{color:var(--ink);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+td:first-child{color:var(--ink);font-weight:600}
+.fig{margin:16px 0}
+.fig svg{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.fig figcaption{color:var(--mut);font-size:13px;margin-top:6px}
+.steps{counter-reset:s}
+.step{border-top:1px solid var(--line);padding:12px 0;color:var(--mut)}
+.step b{display:block;color:var(--ink)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--mut);font-size:15px;margin:16px 0}
+.note b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Shift-swap matcher</h1>
+  <p class="tag">Google Apps Script, matching logic, workflow design — in use</p>
+</header>
+<nav>
+  <a href="index.html">Portfolio</a>
+  <a href="cv.html">CV (English)</a>
+  <a href="lebenslauf.html">Lebenslauf (DE)</a>
+</nav>
+<main>
+
+<section>
+  <h2>Overview</h2>
+  <p class="lede">Swapping a shift at work usually happens in a group chat: someone posts "can anyone take my Thursday?", and whoever sees it first answers. With a few hundred people on rotating shifts the post scrolls away within minutes, two people who could have swapped never see each other's request, and nobody checks the rest rule before they agree.</p>
+  <p>This tool turns the swap into a form and a matcher. People describe what they have and what they want; a script looks across every open request, finds the swaps that are actually legal, and puts the two or three people in touch the moment a match exists.</p>
+  <div class="status">
+    <b>Where it stands: in use.</b>
+    Built with a colleague and now used by people on my team. The automatic version runs on Google's servers and needs nothing installed; a Python version runs the same matching rules offline.
+  </div>
+</section>
+
+<section>
+  <h2>How it works</h2>
+  <figure class="fig">
+    <svg viewBox="0 0 800 210" role="img" aria-label="Flow: Google Form, linked sheet, matcher script, rules check, email with WhatsApp link, confirmation">
+      <g font-family="Inter,system-ui,sans-serif" font-size="12">
+        <rect x="12" y="60" width="118" height="70" rx="10" fill="#ffffff" stroke="#251f21" stroke-width="1.5"/>
+        <text x="71" y="88" text-anchor="middle" fill="#251f21" font-weight="600">Google Form</text>
+        <text x="71" y="106" text-anchor="middle" fill="#585254">shift, days off,</text>
+        <text x="71" y="120" text-anchor="middle" fill="#585254">what you want</text>
+
+        <rect x="160" y="60" width="118" height="70" rx="10" fill="#ffffff" stroke="#251f21" stroke-width="1.5"/>
+        <text x="219" y="88" text-anchor="middle" fill="#251f21" font-weight="600">Linked sheet</text>
+        <text x="219" y="106" text-anchor="middle" fill="#585254">one row per</text>
+        <text x="219" y="120" text-anchor="middle" fill="#585254">request</text>
+
+        <rect x="308" y="60" width="118" height="70" rx="10" fill="#ffffff" stroke="#251f21" stroke-width="1.5"/>
+        <text x="367" y="88" text-anchor="middle" fill="#251f21" font-weight="600">Matcher</text>
+        <text x="367" y="106" text-anchor="middle" fill="#585254">2-way and</text>
+        <text x="367" y="120" text-anchor="middle" fill="#585254">3-way loops</text>
+
+        <rect x="456" y="60" width="118" height="70" rx="10" fill="#ffffff" stroke="#251f21" stroke-width="1.5"/>
+        <text x="515" y="88" text-anchor="middle" fill="#251f21" font-weight="600">Rules check</text>
+        <text x="515" y="106" text-anchor="middle" fill="#585254">rest, length,</text>
+        <text x="515" y="120" text-anchor="middle" fill="#585254">notice</text>
+
+        <rect x="604" y="60" width="184" height="70" rx="10" fill="#ffffff" stroke="#251f21" stroke-width="1.5"/>
+        <text x="696" y="88" text-anchor="middle" fill="#251f21" font-weight="600">Email + WhatsApp link</text>
+        <text x="696" y="106" text-anchor="middle" fill="#585254">both people, same</text>
+        <text x="696" y="120" text-anchor="middle" fill="#585254">minute, nothing public</text>
+
+        <g stroke="#3f7365" stroke-width="2" fill="none">
+          <line x1="130" y1="95" x2="158" y2="95"/><line x1="278" y1="95" x2="306" y2="95"/>
+          <line x1="426" y1="95" x2="454" y2="95"/><line x1="574" y1="95" x2="602" y2="95"/>
+        </g>
+        <g fill="#3f7365">
+          <path d="M158 95 l-8 -4 v8 z"/><path d="M306 95 l-8 -4 v8 z"/><path d="M454 95 l-8 -4 v8 z"/><path d="M602 95 l-8 -4 v8 z"/>
+        </g>
+
+        <text x="12" y="170" fill="#585254">Every form submission re-runs the matcher across all open requests, so an old request is matched by a new one.</text>
+        <text x="12" y="190" fill="#585254">Each match is written to a Matches tab and both people are emailed a link to message each other.</text>
+      </g>
+    </svg>
+    <figcaption>The pipeline. Nothing is broadcast: a match goes only to the people in it.</figcaption>
+  </figure>
+
+  <div class="steps">
+    <div class="step"><b>1. One form per request</b>Name, contact, the shift you work (start hour and days off), what you want instead (a specific day off, a start-time range, or a different whole pattern), and the week it applies to.</div>
+    <div class="step"><b>2. Answers land in a linked sheet</b>The sheet is the record; the script reads the form responses directly so nothing has to be copied.</div>
+    <div class="step"><b>3. Every submission runs the matcher</b>The script looks at all open requests, not just the new one, so a request posted on Monday can be matched by one posted on Thursday.</div>
+    <div class="step"><b>4. Two-way and three-way swaps</b>A pair is easy. The three-way case is the one people give up on by hand: A takes B's shift, B takes C's, C takes A's, and everyone ends up with what they asked for.</div>
+    <div class="step"><b>5. Rules are checked before anyone is told</b>A candidate is only offered if it passes the work rules: at least 12 hours between the end of one shift and the start of the next, shift length, notice, and by default only shifts inside the swap week are compared.</div>
+    <div class="step"><b>6. Both people get the same message</b>An email each, with the other person's WhatsApp link and the swap spelled out in plain words. The match is also written to the Matches tab.</div>
+    <div class="step"><b>7. Confirmation, not silence</b>Each person answers in the email: "It happened" confirms the swap; "It will not happen" cancels it, and everyone else in that match goes straight back into the pool and is re-matched. A reminder goes out if nobody has answered after a few hours. Silence never cancels a match, because people often agree on WhatsApp and never press anything.</div>
+  </div>
+</section>
+
+<section>
+  <h2>The three-way loop</h2>
+  <figure class="fig">
+    <svg viewBox="0 0 800 260" role="img" aria-label="Three people in a loop, each taking the next person's shift">
+      <g font-family="Inter,system-ui,sans-serif" font-size="13">
+        <circle cx="400" cy="60" r="34" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
+        <text x="400" y="65" text-anchor="middle" fill="#251f21" font-weight="600">A</text>
+        <circle cx="270" cy="210" r="34" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
+        <text x="270" y="215" text-anchor="middle" fill="#251f21" font-weight="600">B</text>
+        <circle cx="530" cy="210" r="34" fill="#ffffff" stroke="#251f21" stroke-width="2"/>
+        <text x="530" y="215" text-anchor="middle" fill="#251f21" font-weight="600">C</text>
+
+        <g stroke="#3f7365" stroke-width="2" fill="none" marker-end="url(#ar)">
+          <path d="M376 88 C 330 130, 300 150, 288 176"/>
+          <path d="M300 232 C 380 258, 460 250, 512 230"/>
+          <path d="M508 178 C 480 140, 450 110, 424 88"/>
+        </g>
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#3f7365"/>
+          </marker>
+        </defs>
+
+        <text x="300" y="128" fill="#585254">A works B's shift</text>
+        <text x="360" y="258" fill="#585254">B works C's shift</text>
+        <text x="560" y="128" fill="#585254">C works A's shift</text>
+      </g>
+    </svg>
+    <figcaption>A three-way loop: nobody can swap with a single partner, but the three of them together get every request satisfied.</figcaption>
+  </figure>
+  <p>The matcher searches for loops up to three people, then dedupes: if A-B and B-C are both possible, it prefers the match that satisfies the most people without reusing anyone, and sorts so that the shortest loops are offered first.</p>
+</section>
+
+<section>
+  <h2>Rules it enforces</h2>
+  <table>
+    <tr><th>Rule</th><th>What it prevents</th></tr>
+    <tr><td>12 hours rest</td><td>A swap that leaves someone finishing at 23:00 and starting at 11:00 the next morning.</td></tr>
+    <tr><td>Shift length</td><td>Agreeing to a shift that is longer than the one being given away, when that breaks the working-time limit.</td></tr>
+    <tr><td>Notice</td><td>A swap offered for a shift that starts too soon to be changed on the schedule.</td></tr>
+    <tr><td>Inside the swap week</td><td>Comparing patterns across weeks, which produces matches that look right and are not.</td></tr>
+  </table>
+  <p>Day-off requests (I have this day off, I want that one) are checked more loosely, because the shift start may not be known. The tool says so in its output instead of quietly pretending the rest rule was verified.</p>
+</section>
+
+<section>
+  <h2>Two ways to run it</h2>
+  <ul>
+    <li><b>Automatic:</b> a single Google Apps Script file. Runs on Google's servers, free, no computer left on. Setup is one function run on the form.</li>
+    <li><b>Offline:</b> a Python version that runs the same matching rules on a pasted schedule or chat export, for checking a week before the form is live. It has 73 unit tests covering whole-week swaps, single-day swaps, day-off requests and form-to-JSON conversion, so a rule can be changed without silently breaking the matcher.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>What it did on real data</h2>
+  <p>On one week of real requests from the group's chat, the matcher took 29 day-off requests and produced 130 candidate pairings and 23 three-way loops; 17 candidates were rejected by the rest and notice rules before anyone was emailed. That is the part a person cannot do by hand: the pairings are not hard, but checking each one against the rules is.</p>
+  <div class="note">
+    <b>About the data.</b> The form collects names, phone numbers and shift patterns. Nothing from it appears on this page; the numbers above are counts only.
+  </div>
+</section>
+
+<section>
+  <h2>Tools and skills shown</h2>
+  <p>Google Apps Script (Forms, Sheets, Mail, script properties and locking), matching and cycle-search logic with deduplication, rule validation before an offer is made, a confirmation state machine that survives silence, Python with pytest, and form design for people who will not read instructions.</p>
+</section>
+
+</main>
+</body>
+</html>
