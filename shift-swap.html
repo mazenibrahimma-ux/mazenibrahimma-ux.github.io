@@ -42,7 +42,7 @@ td:first-child{color:var(--ink);font-weight:600}
 <body>
 <header>
   <h1>Shift-swap matcher</h1>
-  <p class="tag">Google Apps Script, matching logic, workflow design — in use</p>
+  <p class="tag">Google Apps Script, matching logic, workflow design — pilot</p>
 </header>
 <nav>
   <a href="index.html">Portfolio</a>
@@ -56,8 +56,8 @@ td:first-child{color:var(--ink);font-weight:600}
   <p class="lede">Swapping a shift at work usually happens in a group chat: someone posts "can anyone take my Thursday?", and whoever sees it first answers. With a few hundred people on rotating shifts the post scrolls away within minutes, two people who could have swapped never see each other's request, and nobody checks the rest rule before they agree.</p>
   <p>This tool turns the swap into a form and a matcher. People describe what they have and what they want; a script looks across every open request, finds the swaps that are actually legal, and puts the two or three people in touch the moment a match exists.</p>
   <div class="status">
-    <b>Where it stands: in use.</b>
-    Built with a colleague and now used by people on my team. The automatic version runs on Google's servers and needs nothing installed; a Python version runs the same matching rules offline.
+    <b>Where it stands: pilot.</b>
+    Built with a colleague and tested end to end, and a first group of colleagues is starting to use it. It is not yet handling real swap requests at scale. The automatic version runs on Google's servers and needs nothing installed; a Python version runs the same matching rules offline.
   </div>
 </section>
 
@@ -171,8 +171,8 @@ td:first-child{color:var(--ink);font-weight:600}
 </section>
 
 <section>
-  <h2>What it did on real data</h2>
-  <p>On one week of real requests from the group's chat, the matcher took 29 day-off requests and produced 130 candidate pairings and 23 three-way loops; 17 candidates were rejected by the rest and notice rules before anyone was emailed. That is the part a person cannot do by hand: the pairings are not hard, but checking each one against the rules is.</p>
+  <h2>What it does on a week of schedule data</h2>
+  <p>Run as a test on one week of schedule data (not live requests), the matcher took 29 day-off requests and produced 130 candidate pairings and 23 three-way loops; 17 candidates were rejected by the rest and notice rules before anyone would have been emailed. That is the part a person cannot do by hand: the pairings are not hard, but checking each one against the rules is.</p>
   <div class="note">
     <b>About the data.</b> The form collects names, phone numbers and shift patterns. Nothing from it appears on this page; the numbers above are counts only.
   </div>
