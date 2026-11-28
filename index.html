@@ -7,18 +7,26 @@
 <style>
 :root{--ink:#251f21;--mut:#585254;--line:#eae9ea;--teal:#3f7365;--bg:#fbfbfa;--card:#ffffff}
 *{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 header{max-width:880px;margin:0 auto;padding:48px 20px 8px}
 h1{font-size:34px;letter-spacing:-.02em}
+.kicker{color:var(--mut);font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 .tag{color:var(--teal);font-weight:600;margin:4px 0 12px}
 .intro{color:var(--mut);max-width:640px}
+.goal{margin-top:16px;border-left:3px solid var(--teal);padding:2px 0 2px 14px;font-weight:600;max-width:640px}
 nav{max-width:880px;margin:18px auto 0;padding:0 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap}
 nav a{padding:8px 2px;color:var(--mut);text-decoration:none;font-weight:600;font-size:14px}
 nav a.on{color:var(--ink);border-bottom:2px solid var(--ink)}
+nav.jump{max-width:880px;margin:0 auto;padding:10px 20px;border-bottom:1px solid var(--line);gap:8px;flex-wrap:nowrap;overflow-x:auto}
+nav.jump a{padding:5px 12px;border:1px solid var(--line);border-radius:99px;font-size:13px;background:var(--card);white-space:nowrap}
 main{max-width:880px;margin:0 auto;padding:24px 20px 64px}
-section{margin:34px 0}
+section{margin:38px 0;scroll-margin-top:12px}
+.num{color:var(--teal);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
 h2{font-size:22px;margin-bottom:14px}
 h3{font-size:16px;margin:18px 0 6px}
+h3.grp{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin:26px 0 2px}
+p.grpt{color:var(--mut);font-size:14px;margin-bottom:6px}
 .strip{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
 .strip img{height:240px;border-radius:10px;flex:none}
 .cap{color:var(--mut);font-size:13px;margin-top:6px}
@@ -34,9 +42,10 @@ table.facts td:first-child{color:var(--mut);width:170px}
 .project .n{color:var(--teal);font-weight:600;margin-right:8px}
 .project p{color:var(--mut);font-size:15px;margin-top:2px}
 .project .more{font-size:14px;font-weight:600}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:1px 8px;margin-left:8px;vertical-align:2px}
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .gal figure{margin:0}
-.gal img{width:100%;border-radius:10px;display:block}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block}
 .gal figcaption{color:var(--mut);font-size:13px;margin-top:4px}
 .skills{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .skill{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
@@ -47,19 +56,34 @@ li{margin:5px 0}
 a{color:var(--teal)}
 .note{background:#f4efec;border-radius:10px;padding:14px 16px;font-size:14px;color:var(--mut)}
 .role{color:var(--mut);font-size:14px}
-@media(max-width:640px){.gal,.skills{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.strip img{height:180px}table.facts td:first-child{width:120px}}
+.cta{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.cta p{color:var(--mut);font-size:15px}
+.cta .links{margin-top:10px;font-size:15px;font-weight:600}
+@media(max-width:640px){.gal,.skills{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.strip img{height:180px}table.facts td:first-child{width:110px}h1{font-size:30px}}
 </style>
 </head>
 <body>
 <header>
+  <p class="kicker">Alexandria, Egypt</p>
   <h1>Mazen Ahmed</h1>
-  <p class="tag">Mechatronics Engineer &amp; Hardware Diagnostics Specialist</p>
-  <p class="intro">I diagnose and repair hardware at component level, program Siemens PLCs, build embedded prototypes, and write the software that ties them together.</p>
+  <p class="tag">Mechatronics engineer: hardware diagnostics, industrial control, embedded prototyping</p>
+  <p class="intro">I find the fault in a board, design and print the part that holds it, program the controller that runs it, and write the tool that makes the job faster. This page is the record of that work: what I fixed on the job, what I built on my own time, and what I am certified in.</p>
+  <p class="goal">Looking for a junior mechatronics or hardware engineering role in Egypt, or an Ausbildung / entry-level position in Germany.</p>
 </header>
 <nav>
   <a class="on" href="index.html">Portfolio</a>
   <a href="cv.html">CV (English)</a>
   <a href="lebenslauf.html">Lebenslauf (DE)</a>
+</nav>
+<nav class="jump">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#workshop">Workshop</a>
+  <a href="#skills">Skills</a>
+  <a href="#education">Education</a>
+  <a href="#certificates">Certificates</a>
+  <a href="#contact">Contact</a>
 </nav>
 <main>
 
@@ -69,50 +93,85 @@ a{color:var(--teal)}
     <img src="photos/siemens-plc.jpg" alt="Siemens S7-300 PLC bench with STEP 7 on screen">
     <img src="photos/distillation-rig.jpg" alt="Pilot-scale glass distillation rig">
   </div>
-  <p class="cap">Training center and workshop: FESTO MPS rig, Siemens S7-300 bench, pilot-scale distillation plant.</p>
+  <p class="cap">Where I trained: FESTO MPS rig, Siemens S7-300 bench, pilot-scale distillation plant.</p>
 </section>
 
-<section>
-  <h2>About</h2>
-  <p>Mechatronics engineer in Alexandria, Egypt, trained on the German dual-system model.</p>
+<section id="about">
+  <p class="num">01</p>
+  <h2>About me</h2>
+  <p>Mechatronics engineer in Alexandria, Egypt, trained on the German dual-system model at the Technology Competency Center in Cairo: two years, 80% of it in the workshop, on the same equipment and standards used on a German shop floor.</p>
+  <p style="margin-top:10px">I spent just over two years at Micro Ohm Electronics in Cairo, where I diagnosed and repaired boards at component level, kept the 3D printer fleet running, and produced the technical videos that sold the parts. Before and after that, I build my own hardware: PCBs I etch and solder myself, 3D-printed enclosures, firmware on ESP and Arduino boards, and small software tools that remove boring work.</p>
   <table class="facts">
     <tr><td>Location</td><td>Alexandria, Egypt (Cairo second base)</td></tr>
-    <tr><td>Languages</td><td>Arabic native, English C2, German A1</td></tr>
+    <tr><td>Languages</td><td>Arabic native, English C2 (EF SET), German A1 (Goethe-certified, working toward B1)</td></tr>
     <tr><td>Education</td><td>Vocational Diploma in Mechatronics, TCC Cairo, 2025</td></tr>
-    <tr><td>Status</td><td>Available for projects</td></tr>
+    <tr><td>Status</td><td>Available for work</td></tr>
     <tr><td>Email</td><td><a href="mailto:mazenibrahim.ma@gmail.com">mazenibrahim.ma@gmail.com</a></td></tr>
     <tr><td>Phone</td><td>+20 150 865 7041</td></tr>
     <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/mazen-ahmed-mechatronics">linkedin.com/in/mazen-ahmed-mechatronics</a></td></tr>
   </table>
-  <p style="margin-top:12px"><b>What I'm looking for:</b> junior mechatronics or hardware engineering roles in Egypt, and Ausbildung or entry-level positions in Germany.</p>
 </section>
 
 <section>
-  <h2>Experience at a glance</h2>
+  <p class="num">02</p>
+  <h2>At a glance</h2>
   <div class="stats">
     <div class="stat"><b>2+ years</b><span>component-level hardware diagnostics and repair at Micro Ohm Electronics, Cairo</span></div>
+    <div class="stat"><b>2-year diploma</b><span>Mechatronics, German dual-system model (GIZ), 80% workshop training, 89.4% in practical subjects</span></div>
+    <div class="stat"><b>11 projects</b><span>hands-on builds and tools: embedded, PCB fabrication, automation, desktop and web software</span></div>
     <div class="stat"><b>1M+ views</b><span>technical demonstration videos scripted, filmed and produced for product advertising</span></div>
-    <div class="stat"><b>8 projects</b><span>hands-on builds: embedded, PCB fabrication, automation tooling and desktop/web software</span></div>
-    <div class="stat"><b>2-year diploma</b><span>Mechatronics, German dual-system model (GIZ), 80% workshop training — 79.6% overall, 89.4% practical</span></div>
     <div class="stat"><b>Siemens S7</b><span>STEP 7 / SIMATIC Manager, LAD/STL/FBD, trained on FESTO MPS and process rigs</span></div>
     <div class="stat"><b>3 languages</b><span>Arabic native, English C2 (EF SET), German A1 (Goethe-certified, working toward B1)</span></div>
   </div>
 </section>
 
-<section>
+<section id="experience">
+  <p class="num">03</p>
+  <h2>Work experience</h2>
+  <p><b>Technical Team Member and Hardware Diagnostics, Micro Ohm Electronics</b><br><span class="role">Mar 2024 – Apr 2026, Cairo</span></p>
+  <ul>
+    <li>Diagnosed and repaired consumer electronics, development boards (Arduino, ESP modules, PWM dimmers) and sensor kits at component level; PCB soldering, rework and trace repair.</li>
+    <li>Brought dead units back into service: restored USB recognition on K150 PIC programmers, rebuilt department PID control trainer units, and repaired damaged wiring-harness terminals on 5/2 solenoid valves and pressure sensors.</li>
+    <li>Overhauled and calibrated the FDM 3D printer fleet: hotends, cooling fans, heating elements and thermistors; prepared files, printed and delivered finished parts.</li>
+    <li>Built Python web scrapers that turn product listings into structured CSV catalogs, and a Google Apps Script pipeline that parses payment confirmation emails into Google Sheets.</li>
+    <li>Scripted, filmed and produced technical demonstration videos for product advertising, over 1,000,000 cumulative views.</li>
+    <li>Advised customers on components and microcontrollers so they bought the right parts.</li>
+  </ul>
+</section>
+
+<section id="projects">
+  <p class="num">04</p>
   <h2>Projects</h2>
-  <div class="project"><b><span class="n">1</span>Otto Ninja bipedal walking robot</b><p>Four-servo walking robot on an ESP8266 with custom C++ gait logic and a 3D-printed chassis. Adapted and modified from an existing open project, with AI assistance.</p></div>
+  <p class="grpt" style="margin-bottom:2px">Grouped by the kind of work, not by date, so related builds sit together. The first group is the work I was paid to do, the rest is my own.</p>
+
+  <h3 class="grp">A. Repair and restoration</h3>
+  <p class="grpt">Take a dead or misbehaving unit, find the fault at component level, put it back into service.</p>
+  <div class="project"><b><span class="n">1</span>Equipment restoration archive</b><p>K150 PIC programmers with dead USB recognition brought back to life; department PID control trainer units restored; damaged wiring-harness terminals on 5/2 solenoid valves and pressure sensors rebuilt. Also repaired development boards, sensor kits and power conversion circuits in daily workshop use.</p></div>
+
+  <h3 class="grp">B. Embedded and electronics builds</h3>
+  <p class="grpt">Boards designed and etched by hand, firmware on ESP and Arduino, enclosures modeled and printed to fit.</p>
   <div class="project"><b><span class="n">2</span>Secondary keyboard macro pad and room lighting controller</b><p>A second USB keyboard isolated by hardware ID through the Interception driver, scripted with AutoHotkey v2 to run macros (OBS scene switching) and talk over USB serial to an Arduino that switches room lighting relays. <a class="more" href="macropad.html">Project page with working demo video →</a></p></div>
   <div class="project"><b><span class="n">3</span>Custom IR sensor module with 3D-printed enclosure</b><p>LM358 op-amp circuit designed in EAGLE, etched and hand-soldered as a single-layer PCB, fitted in a snap-fit enclosure modeled and printed to the board dimensions. <a class="more" href="ir-sensor.html">Project page with schematic and build photos →</a></p></div>
   <div class="project"><b><span class="n">4</span>Custom PCB prototyping, EAGLE and bench etching</b><p>Single-sided boards with op-amp comparator circuits (LM339/LM358) and IRF540 MOSFET drivers: schematic capture, routing, toner transfer, FeCl3 etching, drilling and soldering.</p></div>
   <div class="project"><b><span class="n">5</span>EMG bio-signal interface</b><p>Surface EMG muscle sensor modules wired to Arduino/ESP boards, capturing raw biopotential signals and plotting live voltage spikes over serial.</p></div>
-  <div class="project"><b><span class="n">6</span>TCC grade management tool</b><p>Standalone PySimpleGUI and pandas desktop app built for the training center to record and process student evaluations across the pneumatics, electricity and hydraulics labs.</p></div>
-  <div class="project"><b><span class="n">7</span>Call-center shift and pay tracker</b><p>Mobile-first web app that tracks shifts automatically from a rotating schedule and shows live net earnings with night allowances, KPI bonuses and holiday multipliers. Single-file vanilla HTML/CSS/JS, offline-first, with payslip-based deduction calibration, notifications and JSON/CSV backup. Four versions shipped in one week, in daily personal use.</p></div>
-  <div class="project"><b><span class="n">8</span>Magnetic door alarm</b><p>Compact magnetic door alarm built for a friend: a reed switch and magnet on the door, about 10 m of wire running upstairs to a buzzer in their second apartment, all fitted in a custom-designed 3D-printed enclosure. It beeps intermittently whenever the door opens.</p></div>
+  <div class="project"><b><span class="n">6</span>Otto Ninja bipedal walking robot</b><p>Four-servo walking robot on an ESP8266 with custom C++ gait logic and a 3D-printed chassis. Adapted and modified from an existing open project, with AI assistance.</p></div>
+  <div class="project"><b><span class="n">7</span>Magnetic door alarm</b><p>Compact magnetic door alarm built for a friend: a reed switch and magnet on the door, about 10 m of wire running upstairs to a buzzer in their second apartment, all fitted in a custom-designed 3D-printed enclosure. It beeps intermittently whenever the door opens.</p></div>
+
+  <h3 class="grp">C. Software and automation</h3>
+  <p class="grpt">Tools I wrote because the manual version of the job was wasting someone's time, mine included.</p>
+  <div class="project"><b><span class="n">8</span>TCC grade management tool</b><p>Standalone PySimpleGUI and pandas desktop app built for the training center to record and process student evaluations across the pneumatics, electricity and hydraulics labs.</p></div>
+  <div class="project"><b><span class="n">9</span>Call-center shift and pay tracker</b><p>Mobile-first web app that tracks shifts automatically from a rotating schedule and shows live net earnings with night allowances, KPI bonuses and holiday multipliers. Single-file vanilla HTML/CSS/JS, offline-first, with payslip-based deduction calibration, notifications and JSON/CSV backup. Four versions shipped in one week, in daily personal use.</p></div>
+  <div class="project"><b><span class="n">10</span>Shift-swap matcher for colleagues</b><p>A Google Form and linked sheet that collect each person's shift and off days, plus a scheduled script that pairs up compatible swaps and notifies both people by email and WhatsApp the moment a match fits. Built with a colleague, now used by people on my team.</p></div>
+
+  <h3 class="grp">D. In progress</h3>
+  <p class="grpt">Designed and heading for a first print. Nothing is for sale yet.</p>
+  <div class="project"><b><span class="n">11</span>Pocket break buzzer<span class="pill">Prototype</span></b><p>A pocket-sized break timer for call-center and customer-service agents, who all break at the same fixed times. Two-part 3D-printed case, tactile button and vibration motor, with gestures that match how a break actually works: double-press to start a break, hold one second for lunch, press to stop, hold four seconds to switch an early warning three or eight minutes before the end, felt as one or two buzzes. Case designed, STLs finalised, first prints ordered; assembly next.</p></div>
 </section>
 
-<section>
+<section id="workshop">
+  <p class="num">05</p>
   <h2>Workshop and lab</h2>
+  <p class="grpt">Photographs from my own training and workshop, nothing staged or stock.</p>
   <div class="gal">
     <figure><img src="photos/ir-enclosure.jpg" alt="Hand-soldered IR sensor PCB in its 3D-printed enclosure"><figcaption>IR sensor module: etched, soldered and enclosed by hand (project 3).</figcaption></figure>
     <figure><img src="photos/ir-board.jpg" alt="Close-up of the etched and soldered LM358 board"><figcaption>The same LM358 board before fitting the enclosure.</figcaption></figure>
@@ -123,53 +182,59 @@ a{color:var(--teal)}
     <figure><img src="photos/oscilloscope-lab.jpg" alt="Electronics lab bench with oscilloscope showing a waveform"><figcaption>Oscilloscope and lab power supplies, electronics lab.</figcaption></figure>
     <figure><img src="photos/distillation-panel.jpg" alt="Control panel of the pilot distillation plant with temperature controllers"><figcaption>Control panel of the pilot-scale distillation plant.</figcaption></figure>
     <figure><img src="photos/lathe-maintenance.jpg" alt="Hands servicing a lathe chuck"><figcaption>Mechanical maintenance: lathe chuck service in the workshop.</figcaption></figure>
-    <figure><img src="photos/door-alarm.jpg" alt="Magnetic door alarm prototype in a 3D-printed enclosure"><figcaption>Magnetic door alarm prototype, custom 3D-printed enclosure (project 8).</figcaption></figure>
+    <figure><img src="photos/door-alarm.jpg" alt="Magnetic door alarm prototype in a 3D-printed enclosure"><figcaption>Magnetic door alarm prototype, custom 3D-printed enclosure (project 7).</figcaption></figure>
   </div>
 </section>
 
 <section>
+  <p class="num">06</p>
   <h2>Demo videos</h2>
   <p>Technical demonstration reel filmed and produced for Micro Ohm Electronics, over 1M views: <a href="https://www.facebook.com/reel/2070225810106393">watch on Facebook</a>.</p>
   <p style="color:var(--mut)">Working demo of the macro pad and lighting controller is embedded on <a href="macropad.html">its project page</a>. More demos on request: lathe training, hydraulics demonstration and PLC automation runs.</p>
 </section>
 
-<section>
-  <h2>Experience</h2>
-  <p><b>Technical Team Member and Hardware Diagnostics, Micro Ohm Electronics</b><br><span class="role">Mar 2024 – Apr 2026, Cairo</span></p>
-  <ul>
-    <li>Component-level diagnosis and repair of consumer electronics, development boards (Arduino, ESP modules) and sensor kits; PCB soldering and rework.</li>
-    <li>Overhauled and calibrated FDM 3D printers: hotends, cooling, heating elements, thermistors; prepared files and delivered finished prints.</li>
-    <li>Built Python web scrapers that turn product listings into structured CSV catalogs, and a Google Apps Script pipeline that parses payment confirmation emails into Google Sheets.</li>
-    <li>Scripted, filmed and produced technical demonstration videos for product advertising, over 1,000,000 cumulative views.</li>
-    <li>Advised customers on components and microcontrollers so they bought the right parts.</li>
-  </ul>
-</section>
-
-<section>
+<section id="skills">
+  <p class="num">07</p>
   <h2>Technical skills</h2>
   <div class="skills">
+    <div class="skill"><b>Diagnostics and repair</b><p>Component-level fault-finding on consumer electronics, development boards and sensor modules; digital multimeters, oscilloscopes and signal generators; through-hole soldering, IC sockets, terminal blocks, trace repair and harness crimping.</p></div>
     <div class="skill"><b>PLC and industrial control</b><p>Siemens STEP 7 / SIMATIC Manager (S7-300), LAD, STL, FBD, timer/counter functions, online monitoring and I/O verification. Relay control panels, DIN-rail mounting, contactors and thermal overloads (24V DC / 220V AC), thyristor and power switching.</p></div>
     <div class="skill"><b>Fluid power and process</b><p>Electro-pneumatics sequencing on FESTO benches, hydraulics, pilot-scale distillation process rigs, FESTO MPS systems.</p></div>
     <div class="skill"><b>Embedded systems</b><p>ESP8266, ESP32, Arduino, PIC; C++ firmware; sensors and actuators from thermocouples to servo and DC motors.</p></div>
     <div class="skill"><b>PCB design and fabrication</b><p>EAGLE 9.6 schematic and layout, chemical etching, through-hole soldering, rework and harness crimping.</p></div>
     <div class="skill"><b>Software</b><p>Python (pandas, PySimpleGUI, BeautifulSoup), AutoHotkey v2 with the Interception driver, Google Apps Script pipelines, web scraping to structured CSV catalogs.</p></div>
-    <div class="skill"><b>Workshop and instruments</b><p>Oscilloscopes, multimeters, signal generators, lab power supplies, FDM 3D printing, Solid Edge enclosures, Cura/PrusaSlicer slicing, lathe and rotary tools.</p></div>
+    <div class="skill"><b>CAD and 3D printing</b><p>Solid Edge for enclosures and mechanical parts, FDM printing with Cura and PrusaSlicer, printer overhaul and calibration. Houdini for procedural 3D modelling and simulation practice.</p></div>
+    <div class="skill"><b>Workshop and instruments</b><p>Oscilloscopes, multimeters, signal generators, lab power supplies, lathe, rotary tools, metal cutting shears, bench etching and drilling.</p></div>
   </div>
 </section>
 
-<section>
+<section id="education">
+  <p class="num">08</p>
   <h2>Education</h2>
-  <div class="project"><b><span class="n">1</span>Vocational Diploma in Mechatronics, Technology Competency Center (TCC), Cairo</b><p>2023 – 2025. Two-year diploma modeled on the German dual system via GIZ technical cooperation, 80% hands-on workshop training. Overall 79.6%; practical subjects 89.4%.</p></div>
+  <div class="project"><b><span class="n">1</span>Vocational Diploma in Mechatronics, Technology Competency Center (TCC), Cairo</b><p>2023 – 2025. Two-year diploma modeled on the German dual system via GIZ technical cooperation, 80% hands-on workshop training. Coursework in automated production systems (MPS), PLC programming, pneumatics and hydraulics, on Siemens, Festo, Bosch and Mercedes-Benz training equipment. Overall 79.6%; practical subjects 89.4%.</p></div>
   <div class="project"><b><span class="n">2</span>High School Diploma, Zahran Language Schools (ZLS)</b><p>Graduated 2023.</p></div>
 </section>
 
-<section>
-  <h2>Certifications and competitions</h2>
+<section id="certificates">
+  <p class="num">09</p>
+  <h2>Certificates and competitions</h2>
   <ul>
+    <li>English C2, EF SET certificate.</li>
+    <li>German A1, Goethe-Zertifikat (working toward B1).</li>
     <li>Robotics Programming Level 1 and Level 2 (EV3), Technofuture, 2016.</li>
     <li>FIRST LEGO League Egypt Championship, Smart Village, Giza, Apr 2017.</li>
     <li>Goethe-Institut Kairo choir project "Lasst uns singen!", 2018.</li>
   </ul>
+</section>
+
+<section id="contact">
+  <p class="num">10</p>
+  <h2>Get in touch</h2>
+  <div class="cta">
+    <p>Open to junior mechatronics and hardware roles in Egypt, and to Ausbildung or entry-level positions in Germany. I am also available for repair work and small hardware builds.</p>
+    <p class="links"><a href="mailto:mazenibrahim.ma@gmail.com">mazenibrahim.ma@gmail.com</a> · +20 150 865 7041 · <a href="https://www.linkedin.com/in/mazen-ahmed-mechatronics">LinkedIn</a></p>
+    <p class="links" style="margin-top:6px"><a href="cv.html">CV in English</a> · <a href="lebenslauf.html">Lebenslauf auf Deutsch</a></p>
+  </div>
 </section>
 
 </main>
